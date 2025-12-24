@@ -12,6 +12,10 @@ export interface SnowSettings {
   timeOfDay: number; // 0 - 24
 }
 
+const now = new Date()
+const hour = now.getHours()
+const minute = now.getMinutes()
+
 export const DEFAULT_SETTINGS: SnowSettings = {
   particleCount: 200,
   minSize: 1,
@@ -23,7 +27,7 @@ export const DEFAULT_SETTINGS: SnowSettings = {
   backgroundColor: '#3b82f6',
   motionStretch: 0,
   sparkleIntensity: 0,
-  timeOfDay: 12, // Noon
+  timeOfDay: +(hour + minute / 60).toFixed(2), // Noon
 };
 
 export interface AIWeatherResponse {
