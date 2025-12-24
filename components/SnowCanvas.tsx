@@ -75,11 +75,15 @@ export const SnowCanvas: React.FC<SnowCanvasProps> = ({ settings, onSettingsChan
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let angle = 0;
+
     const render = () => {
       // Read latest settings from ref to avoid hook dependency restart
       const currentSettings = settingsRef.current;
       const { width, height } = canvas;
       
+      angle += 0.01;
+
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
@@ -95,8 +99,13 @@ export const SnowCanvas: React.FC<SnowCanvasProps> = ({ settings, onSettingsChan
         const p = particles[i];
 
         // Movement
-        p.x += Math.sin(p.density + i) * 0.3 + currentSettings.windSpeed + p.vx;
-        p.y += (Math.cos(p.density + i) * 0.1 + currentSettings.fallSpeed + p.vy);
+        // Horizontal sway with time-based angle
+        p.x += Math.sin(angle + p.density) * 0.5 + currentSettings.windSpeed + p.vx;
+        
+        // Vertical float/bobbing
+        // Adding a cosine wave to vertical movement creates the "floating up and down" effect
+        // varying against the fall speed
+        p.y += Math.cos(angle + p.density) * 0.5 + currentSettings.fallSpeed + p.vy;
 
         // Wrapping
         if (p.x > width + 20) p.x = -20;

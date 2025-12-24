@@ -17,7 +17,7 @@ const hour = now.getHours()
 const minute = now.getMinutes()
 
 export const DEFAULT_SETTINGS: SnowSettings = {
-  particleCount: 200,
+  particleCount: 1000,
   minSize: 1,
   maxSize: 4,
   fallSpeed: 1.5,

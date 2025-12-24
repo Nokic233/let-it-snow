@@ -3,7 +3,6 @@ import { SnowCanvas } from './components/SnowCanvas';
 import { ControlPanel } from './components/ControlPanel';
 import { SnowSettings, DEFAULT_SETTINGS } from './types';
 import { getAtmosphere } from './utils/weatherUtils';
-import { Trees } from 'lucide-react';
 
 const App: React.FC = () => {
   const [settings, setSettings] = useState<SnowSettings>(DEFAULT_SETTINGS);
@@ -73,16 +72,6 @@ const App: React.FC = () => {
       <div className="absolute inset-0 z-0 flex items-end justify-center pointer-events-none">
           {/* Simple vector mountains/trees for atmosphere */}
           <div className="w-full h-1/2 bg-gradient-to-t from-black/80 via-black/20 to-transparent absolute bottom-0 z-10"></div>
-          
-          {/* Trees colored by atmosphere somewhat */}
-          <Trees 
-            className="absolute bottom-0 left-[-50px] md:left-10 w-64 h-64 transform -scale-x-100 z-10 transition-colors duration-1000" 
-            style={{ color: 'rgba(0,0,0,0.7)' }}
-          />
-          <Trees 
-            className="absolute bottom-0 right-[-50px] md:right-20 w-80 h-80 z-10 transition-colors duration-1000" 
-            style={{ color: 'rgba(0,0,0,0.8)' }}
-          />
       </div>
 
       {/* Main Content Layer */}
